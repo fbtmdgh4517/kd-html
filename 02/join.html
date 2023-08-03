@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="return check()">
+        <label for="name">name</label><br>
+        <input type="text" id="name" placeholder="name"><br>
+        <label for="id">id</label><br>
+        <input type="text" id="id" placeholder="id"><br>
+        <label for="password">password</label><br>
+        <input type="password" id="password" placeholder="password"><br>
+        <label for="m">남자</label>
+        <input type="radio" id="m" name="sb">
+        <label for="f">여자</label>
+        <input type="radio" id="f" name="sb"><br>
+        <label for="phone">phone</label><br>
+        <input type="text" id="phone" placeholder="phone"><br>
+        <button>컹스</button>
+    </form>
+    <script>
+        function check() {
+            const name = document.querySelector('#name');
+            const id = document.querySelector('#id');
+            const password = document.querySelector('#password');
+            const sb = document.getElementsByName('sb');
+            // const sb = document.querySelector('input[name=sb]:checked');
+            const phone = document.querySelector('#phone');
+
+            if(name.value.trim() < 2) {
+                alert('이름은 2글자 이상 ㅋㅋ');
+                name.value = '';
+                name.focus();
+                return false;
+            }
+            if(id.value.trim() < 4) {
+                alert('아이디는 4글자 이상 ㅋㅋ');
+                id.value = '';
+                id.focus();
+                return false;
+            }
+            if(password.value.trim() < 4) {
+                alert('비밀번호는 4글자 이상 ㅋㅋ');
+                password.value = '';
+                password.focus();
+                return false;
+            }
+            if(!sb[0].checked && !sb[1].checked) {
+                alert('둘 중에 반드시 선택');
+                return false;
+            }
+            // if(sb === null) {
+            //     alert('둘 중에 반드시 선택');
+            //     return false;
+            // }
+            if(isNaN(parseInt(phone.value))) {
+                alert('전화번호는 숫자를 입력 ㅋㅋ');
+                phone.value = '';
+                phone.focus();
+                return false;
+            }
+            if(phone.value.length !== 11) {
+                alert('전화번호는 11자리 ㅋㅋ');
+                phone.value = '';
+                phone.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
