@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border-color: green;
+            border-width: 3px;
+            border-style: solid;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="bet" placeholder="배팅">
+    <input type="text" id="selectNum" placeholder="숫자선택">
+    <button onclick="startRoulette()">가자!</button>
+    
+    <table border="1">
+    </table>
+    <script>
+        let redIdx = -1;
+        let blueIdx = -1;
+        let greenIdx = -1;
+
+        function startRoulette() {
+            const tds = document.querySelectorAll('td');
+            const selectNum = document.querySelector('#selectNum');
+            const bet = document.querySelector('#bet');
+            const interval = setInterval(function() {
+                for(let i=0; i<tds.length; i++) {
+                    tds[i].style='background-color:white;';
+                }
+                redIdx = Math.floor(Math.random() * tds.length);
+                tds[redIdx].style = 'background-color:red;';
+
+                blueIdx = Math.floor(Math.random() * tds.length);
+                tds[blueIdx].style = 'background-color:blue;';
+
+                greenIdx = Math.floor(Math.random() * tds.length);
+                tds[greenIdx].style = 'background-color:green;';
+            }, 250);
+
+            setTimeout(function() {
+                if(parseInt(selectNum.value) - 1 === redIdx) {
+                    alert(`빨강번호:${redIdx+1}, 파랑번호:${blueIdx+1}, 초록번호:${greenIdx+1}`);
+                    alert(`${parseInt(bet.value) * 10}원(배팅값의 10배)을 잃었다.`);
+                } else if(parseInt(selectNum.value) - 1 === blueIdx) {
+                    alert(`빨강번호:${redIdx+1}, 파랑번호:${blueIdx+1}, 초록번호:${greenIdx+1}`);
+                    alert(`${parseInt(bet.value) * 10}원(배팅값의 10배)을 얻었다.`);
+                } else if(parseInt(selectNum.value) - 1 === greenIdx) {
+                    alert(`빨강번호:${redIdx+1}, 파랑번호:${blueIdx+1}, 초록번호:${greenIdx+1}`);
+                    alert(`${parseInt(bet.value) * 5}원(배팅값의 5배)을 얻었다.`);
+                } else {
+                    alert(`빨강번호:${redIdx+1}, 파랑번호:${blueIdx+1}, 초록번호:${greenIdx+1}`);
+                    alert('0원');
+                }
+                clearInterval(interval);
+            }, 3000);
+        }
+        const table = document.querySelector('table');
+        let html = '';
+        for(let i=0; i<5; i++) {
+            html += '<tr>';
+            for(let j=1; j<=10; j++) { 
+                html += `<td>${(i) * 10 + j}</td>`;
+            }
+            html += '</tr>';
+        }
+        table.innerHTML = html;
+    </script>
+</body>
+</html>
