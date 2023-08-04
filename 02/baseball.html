@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.onload = function() { // html 다 로드 했을때 실행
+            const gDiv = document.querySelector('#gDiv');
+            gDiv.style.display = 'none';
+            const sDiv = document.querySelector('#sDiv');
+            const arr = [];
+
+            document.querySelector('#sBtn').onclick = function() {
+                while(arr.length<3) {
+                    const rNum = Math.floor(Math.random() * (9 + 1));
+                    if(!arr.includes(rNum)) {
+                        arr.push(rNum);
+                    }
+                }
+                sDiv.style.display = 'none';
+                gDiv.style.display = 'block';
+                // const arr = [];
+                // for(let i=0; i<3; i++) {
+                //     const rNum = Math.floor(Math.random() * 10);
+                //     if(arr.includes(rNum)) {
+                //         i--;
+                //     } else {
+                //         arr.push(rNum);
+                //     }
+                // }
+                console.log(arr);
+            }
+            
+            document.querySelector('#gBtn').onclick = function() {
+                const numObj1 = document.querySelector('#num1');
+                const numObj2 = document.querySelector('#num2');
+                const numObj3 = document.querySelector('#num3');
+                const num1 = parseInt(numObj1.value);
+                const num2 = parseInt(numObj2.value);
+                const num3 = parseInt(numObj3.value);
+                const resultDiv = document.querySelector('#result');
+                let strike = 0;
+                let ball = 0;
+                const inputArr = [];
+                inputArr.push(num1);
+                inputArr.push(num2);
+                inputArr.push(num3);
+                for(let i=0; i<inputArr.length; i++) {
+                    const idx = arr.indexOf(inputArr[i]);
+                    if(idx === i) {
+                        strike++;
+                    } else if(idx != -1) {
+                        ball++;
+                    }
+                }
+
+                // if(arr[0] === num1) {
+                //     strike++;
+                // }
+                // if(arr[1] === num1) {
+                //     ball++;
+                // }
+                // if(arr[2] === num1) {
+                //     ball++;
+                // }
+
+                // if(arr[0] === num2) {
+                //     ball++;
+                // }
+                // if(arr[1] === num2) {
+                //     strike++;
+                // }
+                // if(arr[2] === num2) {
+                //     ball++;
+                // }
+
+                // if(arr[0] === num3) {
+                //     ball++;
+                // }
+                // if(arr[1] === num3) {
+                //     ball++;
+                // }
+                // if(arr[2] === num3) {
+                //     strike++;
+                // }
+                resultDiv.innerHTML = `<b>${strike} 스트라이크 ${ball} 볼</b>`;
+            }
+        }
+    </script>
+    <div id="sDiv">
+        <button id="sBtn">시작</button>
+    </div>
+    <div id="gDiv">
+        <input type="number" min="0" max="9" id="num1">
+        <input type="number" min="0" max="9" id="num2">
+        <input type="number" min="0" max="9" id="num3">
+        <button id="gBtn">맞추기</button>
+    </div>
+    <div id="result">
+
+    </div>
+</body>
+</html>

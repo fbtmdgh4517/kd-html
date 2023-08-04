@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            padding: 1;
+            margin: 1;
+            width: 80px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="startCard()">시작</button>
+    <div id="table">
+    </div>
+    <script>
+        // let reversedCardCount = 0;
+        function reverse(obj) {
+            let openImgs = document.querySelectorAll('img[data-open="1"]');
+            console.log(openImgs.length);
+            if(openImgs.length === 2) {
+                console.log(openImgs.length);
+                return;
+            }
+            const num = obj.getAttribute('data-num');
+            const imgPath = `/img/cards/${num}.png`;
+            obj.src = imgPath;
+            obj.setAttribute('data-open', '1');
+            if(openImgs.length === 1) {
+                openImgs = document.querySelectorAll('img[data-open="1"]');
+                if(openImgs[0].getAttribute('data-num')%13 === openImgs[1].getAttribute('data-num')%13) {
+                    openImgs[0].setAttribute('data-open', '0');
+                    openImgs[1].setAttribute('data-open', '0');
+                } else {
+                    setTimeout(() => {
+                        for(let i=0; i<openImgs.length; i++) {   
+                            openImgs[i].src = '/img/cards/back.png';
+                            openImgs[i].setAttribute('data-open', '0');
+                        }
+                    }, 1000);
+                }
+            }
+            // reversedCardCount++;
+            // if(reversedCardCount <3) {
+            //     console.log(obj);
+            //     const num = obj.getAttribute('data-num');
+            //     const imgPath = `/img/cards/${num}.png`;
+            //     obj.src = imgPath;
+            // } else {
+            //     alert('2개밖에 못 뒤집는다');
+            // }
+        }
+        function startCard() {
+            const tableDiv = document.querySelector('#table');
+            let html = '<table>';
+            let cnt = 0;
+            const arr = [];
+            while(arr.length < 52) {
+                const rNum = Math.floor(Math.random()*52);
+                if(!arr.includes(rNum)) {
+                    arr.push(rNum);
+                }
+            }
+            // for(let i=0; i<52; i++) {
+            //     const rNum = Math.floor(Math.random()*52);
+            //     if(arr.includes(rNum)) {
+            //         i--;
+            //     } else {
+            //         arr.push(rNum);
+            //     }
+            // }
+            for(let i=0; i<4; i++) {
+                html += '<tr>';
+                for(let j=0; j<13; j++) {
+                    html += `<td><img src="/img/cards/back.png" data-num="${arr[cnt++]}" data-open="0" onclick="reverse(this)"></td>`;
+                }
+                html += '</tr>';
+            }
+            html += "</table>";
+            tableDiv.innerHTML = html;
+        }
+
+        // for(let i=0; i<52; i++) {
+        //     if(i%13 === 0) {
+        //         html += '<tr>';
+        //     }
+        //     html += `<td><img src="/img/cards/${i}.png"></td>`;
+        //     if(i%13 === 12) {
+        //         html += "</tr>";
+        //     }
+        // }
+    </script>
+</body>
+</html>
