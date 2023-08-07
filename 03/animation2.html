@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            animation-name: move;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;    /*애니메이션 무한 반복*/
+        }
+        @keyframes move {   /*이름은 임의로 지정*/
+            from {
+                margin-left: 1200px;
+            }
+            to {
+                margin-left: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        애니메이션이 어떻게 되는지 알아본다
+        지금부터 할 거는 @keyframes를 이용한 css 애니메이션 기능임
+    </div>
+</body>
+</html>

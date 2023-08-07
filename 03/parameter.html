@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function f1() {
+            alert(1);
+        }
+
+        function f1(a) {
+            alert(2);
+        }
+
+        // f1();   // 자바스크립트는 오버로딩은 없고 오버라이딩만 있음, 그래서 2가 출력됨
+
+        function f2(a) {
+            a();
+        }
+
+        f2(f1); // 2
+    </script>
+</body>
+</html>
